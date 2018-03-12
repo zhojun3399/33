@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<style type="text/css">
+body{ margin:100px;}
+*{ margin:0; padding:0; list-style:none;}
+#btnPost{ width:80px; height:30px; display:block; background:#74E430; text-align:center; line-height:30px; color:#fff; margin-top:20px; cursor:pointer;}
+
+.plate span{ font-size:12px; color:#B7B7B7;}
+#ULcenmgt{ margin-top:10px;}
+#ULcenmgt ul li{ margin-bottom:6px;}
+
+</style>
+<body>
+	<div>
+    	<textarea id="conment" name="Name"></textarea>
+        
+        <!--评论日期，评论人-->
+        <div class="plate">
+        	<span>评论日期：("PostDate")</span>
+        	<span>评论人IP：("PostAddr")</span>
+        </div>
+        
+        <!--评论内容-->
+        <div id="ULcenmgt">
+			<ul>
+                <li>
+                    <span>第一条评论...</span>
+                </li>
+                <li>
+                    <span>第二条评论...</span>
+                </li>
+                
+            </ul>
+        </div>
+        
+         <!--提交-->
+		<div>
+        	<span id="btnPost">提交</span>
+        </div>	
+    </div>
+    
+    
+</body>
+<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#btnPost").click(function(e) {
+		// var tag = $("<li><span>评论日期："+new Date()+", ID：自己, 内容："+$("#conment").val()+"</span></li>");   // 定义一个节点
+		// $("#ULcenmgt").append(tag);  // 在这里增加节点
+		
+		$.post("http://baidu.com",{ "msg":$("#conment").val()},// 请求的地址 和 我们传给后台的参数.
+		function(data,status){
+			if( status !== success ){
+				alert( "发表评论失败!" );
+				return;
+			}
+			if( data == "ok"  ){
+				var tag = $("<li><span>评论日期："+new Date()+", ID：自己, 内容："+$("#conment").val()+"</span></li>"); // 定义一个节点
+				$("#ULcenmgt").append(tag);  // 在这里增加节点
+				
+				alert("评论发表成功!");
+			}else{
+				alert("评论发表内容有问题");	
+			}
+			
+		});	
+
+	});
+	
+	
+	
+	
+});
+
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
